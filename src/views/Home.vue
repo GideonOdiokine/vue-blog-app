@@ -2,8 +2,9 @@
   <div class="home">
     <h2>Home</h2>
     <div v-if="error">{{ error }}</div>
-    <div v-if="posts.length"
-    <PostList v-if="posts.length" :posts="posts" />
+    <div v-if="posts.length">
+    <PostList  :posts="posts" />
+    </div>
     <div v-else>Loading....</div>
     <!-- <button @click="showPost = !showPost">toggle Post</button>
   </div>
