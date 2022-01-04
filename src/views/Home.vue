@@ -3,7 +3,7 @@
     <h2>Home</h2>
     <div v-if="error">{{ error }}</div>
     <div v-if="posts.length">
-     <PostList  :posts="posts" />
+      <PostList  :posts="posts" />
     </div>
     <div v-else>Loading....</div>
   </div>
