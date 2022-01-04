@@ -1,9 +1,10 @@
 <template>
   <div class="home">
     <h2>Home</h2>
-    <PostList v-if="showPost" :posts="posts" />
-    <button @click="showPost = !showPost">toggle Post</button>
-    <button @click="posts.pop()">delete post</button>
+    <div v-if="error">{{ error }}</div>
+    <PostList :posts="posts" />
+    <!-- <button @click="showPost = !showPost">toggle Post</button>
+    <button @click="posts.pop()">delete post</button> -->
   </div>
 </template>
 
@@ -16,18 +17,23 @@ export default {
   name: "Home",
   components: { PostList },
   setup() {
-    const posts = ref([
-      {
-        title: "welcome to the blog",
-        body: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
-        id: 1,
-      },
-      { title: "top 5 CSS tips", body: "lorem ipsum", id: 2 },
-    ]);
+    const posts = ref([]);
+    const error = ref(null);
+    const load = async () => {
+      try {
+        let data = await fetch("http://localhost:3000/posts");
+        if (!data.ok) {
+          throw Error("no data available");
+        }
+        posts.value = await data.json();
+      } catch (err) {
+        error.value = err.message;
+      }
+    };
+    load();
+    // const showPost = ref(true);
 
-    const showPost = ref(true);
-
-    return { posts, showPost };
+    return { posts, error };
 
     // Dom
     //  <!-- <p ref="p">My name is {{ name }} and I'm {{ age }} years old</p>
