@@ -2,9 +2,10 @@
   <div class="home">
     <h2>Home</h2>
     <div v-if="error">{{ error }}</div>
-    <PostList :posts="posts" />
+    <div v-if="posts.length"
+    <PostList v-if="posts.length" :posts="posts" />
+    <div v-else>Loading....</div>
     <!-- <button @click="showPost = !showPost">toggle Post</button>
-    <button @click="posts.pop()">delete post</button> -->
   </div>
 </template>
 
