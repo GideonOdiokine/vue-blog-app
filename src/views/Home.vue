@@ -3,7 +3,7 @@
     <h2>Home</h2>
     <div v-if="error">{{ error }}</div>
     <div v-if="posts.length">
-      <PostList  :posts="posts" />
+      <PostList :posts="posts" />
     </div>
     <div v-else>Loading....</div>
   </div>
@@ -13,25 +13,15 @@
 // @ is an alias to /src
 import { computed, ref, watch, watchEffect } from "vue";
 import PostList from "../components/PostList.vue";
+import getPosts from "../composables/getPosts";
 
 export default {
   name: "Home",
   components: { PostList },
   setup() {
-    const posts = ref([]);
-    const error = ref(null);
-    const load = async () => {
-      try {
-        let data = await fetch("http://localhost:3000/posts");
-        if (!data.ok) {
-          throw Error("no data available");
-        }
-        posts.value = await data.json();
-      } catch (err) {
-        error.value = err.message;
-      }
-    };
+    const { load, posts, error } = getPosts();
     load();
+
     // const showPost = ref(true);
 
     return { posts, error };
