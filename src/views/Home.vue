@@ -2,6 +2,7 @@
   <div class="home">
     <h2>Home</h2>
     <p>My name is {{ name }} and I'm {{ age }} years old</p>
+    <button @click="handleClick">Click me</button>
   </div>
 </template>
 
