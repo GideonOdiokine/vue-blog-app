@@ -3,7 +3,12 @@
     <h2>Home</h2>
     <!-- <p ref="p">My name is {{ name }} and I'm {{ age }} years old</p>
     <button @click="handleClick">Click me</button> -->
-  <h4>{{name}} </h4>
+    <!-- <h4>{{ name }}</h4> -->
+    <input type="text" v-model="search" />
+    <div>{{ search }} is the search term</div>
+    <div v-for="name in matchingNames" :key="name">
+      {{ name }}
+    </div>
   </div>
 </template>
 
@@ -14,11 +19,13 @@ import { computed, ref } from "vue";
 export default {
   name: "Home",
   setup() {
-    const name = computed(() => {
-      return "Favour";
+    const names = ref(["Gideon", "Favour", "Atim", "Okon", "John"]);
+    const search = ref("");
+    const matchingNames = computed(() => {
+      return names.value.filter((name) => name.includes(search.value));
     });
 
-    return { name };
+    return { names, search, matchingNames };
     // refs
     // const p = ref(null);
 
