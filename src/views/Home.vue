@@ -17,13 +17,15 @@ export default {
     const p = ref(null);
 
     // non-reactive values
-    let name = "Gideon";
-    let age = 23;
+    let name = ref("Gideon");
+    let age = ref(23);
 
     const handleClick = () => {
-      console.log(p, p.value);
-      p.value.classList.add("text");
-      p.value.textContent = "Hello Gidy";
+      name.value = "Odiokine";
+      age.value = 32;
+      // console.log(p, p.value);
+      // p.value.classList.add("text");
+      // p.value.textContent = "Hello Gidy";
     };
 
     return { name, age, handleClick, p };
