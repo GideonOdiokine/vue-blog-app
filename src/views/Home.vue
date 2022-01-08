@@ -14,7 +14,7 @@
 
 <script>
 // @ is an alias to /src
-import { computed, ref } from "vue";
+import { computed, ref, watch, watchEffect } from "vue";
 
 export default {
   name: "Home",
@@ -23,6 +23,12 @@ export default {
     const search = ref("");
     const matchingNames = computed(() => {
       return names.value.filter((name) => name.includes(search.value));
+    });
+    watch(search, () => {
+      console.log("watch just ran");
+    });
+    watchEffect(() => {
+      console.log("WatchEffect just ran");
     });
 
     return { names, search, matchingNames };
