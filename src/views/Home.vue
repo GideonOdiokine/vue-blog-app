@@ -1,34 +1,40 @@
 <template>
   <div class="home">
     <h2>Home</h2>
-    <p ref="p">My name is {{ name }} and I'm {{ age }} years old</p>
-    <button @click="handleClick">Click me</button>
+    <!-- <p ref="p">My name is {{ name }} and I'm {{ age }} years old</p>
+    <button @click="handleClick">Click me</button> -->
+  <h4>{{name}} </h4>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 export default {
   name: "Home",
   setup() {
+    const name = computed(() => {
+      return "Favour";
+    });
+
+    return { name };
     // refs
-    const p = ref(null);
+    // const p = ref(null);
 
-    // non-reactive values
-    let name = ref("Gideon");
-    let age = ref(23);
+    // // non-reactive values
+    // let name = ref("Gideon");
+    // let age = ref(23);
 
-    const handleClick = () => {
-      name.value = "Odiokine";
-      age.value = 32;
-      // console.log(p, p.value);
-      // p.value.classList.add("text");
-      // p.value.textContent = "Hello Gidy";
-    };
+    // const handleClick = () => {
+    //   name.value = "Odiokine";
+    //   age.value = 32;
+    // console.log(p, p.value);
+    // p.value.classList.add("text");
+    // p.value.textContent = "Hello Gidy";
+    // };
 
-    return { name, age, handleClick, p };
+    // return { name, age, handleClick, p };
   },
 };
 </script>
