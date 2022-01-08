@@ -1,0 +1,28 @@
+<template>
+  <div class="home">
+    <h2>Home</h2>
+    <p>My name is {{ name }} and I'm {{ age }} years old</p>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+
+export default {
+  name: "Home",
+  setup() {
+    console.log("setup running");
+
+    let name = "Gideon";
+    let age = 23;
+
+    return { name, age };
+  },
+  created() {
+    console.log("created ");
+  },
+  mounted(){
+    console.log("mounted")
+  }
+};
+</script>
