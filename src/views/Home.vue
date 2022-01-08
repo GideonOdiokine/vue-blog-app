@@ -16,13 +16,11 @@ export default {
     let name = "Gideon";
     let age = 23;
 
-    return { name, age };
+    const handleClick = () => {
+      console.log("I was clicked");
+    };
+
+    return { name, age, handleClick };
   },
-  created() {
-    console.log("created ");
-  },
-  mounted(){
-    console.log("mounted")
-  }
 };
 </script>
