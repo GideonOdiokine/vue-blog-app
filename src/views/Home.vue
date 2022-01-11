@@ -5,7 +5,7 @@
     <div v-if="posts.length">
       <PostList :posts="posts" />
     </div>
-    <div v-else>Loading....</div>
+    <div v-else><Spinner /></div>
   </div>
 </template>
 
@@ -13,11 +13,12 @@
 // @ is an alias to /src
 import { computed, ref, watch, watchEffect } from "vue";
 import PostList from "../components/PostList.vue";
-import getPosts from "../composables/getPosts";
+import Spinner from "../components/Spinner.vue";
+import getPosts from "@/composables/getPosts";
 
 export default {
   name: "Home",
-  components: { PostList },
+  components: { PostList, Spinner },
   setup() {
     const { load, posts, error } = getPosts();
     load();
