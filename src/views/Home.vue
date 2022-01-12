@@ -11,7 +11,6 @@
 
 <script>
 // @ is an alias to /src
-import { computed, ref, watch, watchEffect } from "vue";
 import PostList from "../components/PostList.vue";
 import Spinner from "../components/Spinner.vue";
 import getPosts from "@/composables/getPosts";
