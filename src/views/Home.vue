@@ -1,37 +1,48 @@
 <template>
   <div class="home">
     <h2>Home</h2>
-    <!-- <p ref="p">My name is {{ name }} and I'm {{ age }} years old</p>
-    <button @click="handleClick">Click me</button> -->
-    <!-- <h4>{{ name }}</h4> -->
-    <input type="text" v-model="search" />
-    <div>{{ search }} is the search term</div>
-    <div v-for="name in matchingNames" :key="name">
-      {{ name }}
-    </div>
+    <PostList :posts="posts" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import { computed, ref, watch, watchEffect } from "vue";
+import PostList from "../components/PostList.vue";
 
 export default {
   name: "Home",
+  components: { PostList },
   setup() {
-    const names = ref(["Gideon", "Favour", "Atim", "Okon", "John"]);
-    const search = ref("");
-    const matchingNames = computed(() => {
-      return names.value.filter((name) => name.includes(search.value));
-    });
-    watch(search, () => {
-      console.log("watch just ran");
-    });
-    watchEffect(() => {
-      console.log("WatchEffect just ran");
-    });
+    const posts = ref([
+      { title: "welcome to the blog", body: "Lorem ipsum", id: 1 },
+      { title: "top 5 CSS tips", body: "lorem ipsum", id: 2 },
+    ]);
 
-    return { names, search, matchingNames };
+    return { posts };
+
+    // Dom
+    //  <!-- <p ref="p">My name is {{ name }} and I'm {{ age }} years old</p>
+    // <button @click="handleClick">Click me</button> -->
+    // <!-- <h4>{{ name }}</h4> -->
+    // <input type="text" v-model="search" />
+    // <div>{{ search }} is the search term</div>
+    // <div v-for="name in matchingNames" :key="name">
+    //   {{ name }}
+    // </div>
+
+    // const names = ref(["Gideon", "Favour", "Atim", "Okon", "John"]);
+    // const search = ref("");
+    // const matchingNames = computed(() => {
+    //   return names.value.filter((name) => name.includes(search.value));
+    // });
+    // watch(search, () => {
+    //   console.log("watch just ran");
+    // });
+    // watchEffect(() => {
+    //   console.log("WatchEffect just ran");
+    // });
+    // return { names, search, matchingNames };
     // refs
     // const p = ref(null);
 
