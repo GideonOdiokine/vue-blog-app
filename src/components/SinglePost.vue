@@ -1,10 +1,21 @@
 <template>
-  <h3>{{ post.title }}</h3>
+  <div>
+    <h3>{{ post.title }}</h3>
+    <p>{{ snippet }}</p>
+  </div>
 </template>
 
 <script>
+import { computed } from "@vue/reactivity";
 export default {
   props: ["post"],
+  setup(props) {
+    const snippet = computed(() => {
+      return props.post.body.slice(0, 100) + "....";
+    });
+
+    return { snippet };
+  },
 };
 </script>
 
