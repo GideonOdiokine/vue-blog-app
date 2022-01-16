@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h2>Home</h2>
+    <h3>Home</h3>
     <div v-if="error">{{ error }}</div>
     <div v-if="posts.length">
       <PostList :posts="posts" />
@@ -68,9 +68,29 @@ export default {
 };
 </script>
 <style>
- .home {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 10px;
-  }
+.home {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+h3 {
+  display: inline-block;
+  position: relative;
+  font-size: 26px;
+  color: white;
+  margin-bottom: 10px;
+  max-width: 400px;
+}
+h3::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #ff8800;
+  position: absolute;
+  z-index: -1;
+  padding-right: 40px;
+  left: -30px;
+  transform: rotateZ(-1deg);
+}
 </style>
