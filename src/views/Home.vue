@@ -2,8 +2,9 @@
   <div class="home">
     <h3>Home</h3>
     <div v-if="error">{{ error }}</div>
-    <div v-if="posts.length">
+    <div v-if="posts.length" class="layout">
       <PostList :posts="posts" />
+      <TagCloud :posts="posts" />
     </div>
     <div v-else><Spinner /></div>
   </div>
@@ -12,12 +13,13 @@
 <script>
 // @ is an alias to /src
 import PostList from "../components/PostList.vue";
+import TagCloud from "../components/TagCloud.vue";
 import Spinner from "../components/Spinner.vue";
 import getPosts from "@/composables/getPosts";
 
 export default {
   name: "Home",
-  components: { PostList, Spinner },
+  components: { PostList, Spinner, TagCloud },
   setup() {
     const { load, posts, error } = getPosts();
     load();
@@ -67,13 +69,13 @@ export default {
   },
 };
 </script>
-<style>
+<style >
 .home {
   max-width: 1200px;
   margin: 0 auto;
   padding: 10px;
 }
-h3 {
+div a h3 {
   display: inline-block;
   position: relative;
   font-size: 26px;
@@ -81,7 +83,7 @@ h3 {
   margin-bottom: 10px;
   max-width: 400px;
 }
-h3::before {
+div a  h3::before {
   content: "";
   display: block;
   width: 100%;
@@ -92,5 +94,10 @@ h3::before {
   padding-right: 40px;
   left: -30px;
   transform: rotateZ(-1deg);
+}
+.layout {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
 }
 </style>
