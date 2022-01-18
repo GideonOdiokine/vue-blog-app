@@ -4,6 +4,9 @@
     <h3>{{ post.title }}</h3>
     <p class="pre">{{ post.body }}</p>
     <button @click="handleClick">delete</button>
+    <h4>
+      {{ timeFormat(post.createdAt.toDate()) }}
+    </h4>
   </div>
   <div v-else>
     <Spinner />
@@ -15,6 +18,7 @@ import getPost from "@/composables/getPost";
 import Spinner from "../components/Spinner.vue";
 import { useRouter } from "vue-router";
 import { db } from "../firebase/config";
+import moment from "moment";
 export default {
   props: ["id"],
   components: { Spinner },
@@ -26,8 +30,10 @@ export default {
       await db.collection("posts").doc(props.id).delete();
       router.push({ name: "Home" });
     };
-
-    return { post, error, handleClick };
+    const timeFormat = (date) => {
+     return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+    };
+    return { post, error, handleClick, timeFormat };
   },
 };
 </script>
