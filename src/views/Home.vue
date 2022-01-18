@@ -23,6 +23,7 @@ export default {
   setup() {
     const { load, posts, error } = getPosts();
     load();
+    console.log(posts);
 
     // const showPost = ref(true);
 
@@ -69,7 +70,7 @@ export default {
   },
 };
 </script>
-<style >
+<style>
 .home {
   max-width: 1200px;
   margin: 0 auto;
@@ -83,7 +84,7 @@ div a h3 {
   margin-bottom: 10px;
   max-width: 400px;
 }
-div a  h3::before {
+div a h3::before {
   content: "";
   display: block;
   width: 100%;
