@@ -16,7 +16,7 @@
 <script>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { db } from '../firebase/config'
+import { db,timestamp } from '../firebase/config'
 
 export default {
   setup() {
@@ -39,6 +39,7 @@ export default {
         title: title.value,
         body: body.value,
         tags: tags.value,
+        createdAt:timestamp()
       };
     const res= db.collection("posts").add(post)
       router.push({ name: "Home" });
