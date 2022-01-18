@@ -5,11 +5,14 @@ const getPosts = () => {
     const error = ref(null);
     const load = async () => {
         try {
-            const res = await db.collection("posts").orderBy("createdAt", 'desc').get()
+            const res = await db.collection("posts").orderBy("createdAt", 'desc')
+                .onSnapshot((snapshot) => {
+                    posts.value = snapshot.docs.map(doc => {
+                        return { ...doc.data(), id: doc.id }
+                    })
+                });
 
-            posts.value = res.docs.map(doc => {
-                return { ...doc.data(), id: doc.id }
-            })
+
         } catch (err) {
             error.value = err.message;
         }
