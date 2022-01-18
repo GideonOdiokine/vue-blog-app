@@ -1,15 +1,14 @@
 import { ref } from "vue";
+import { db } from '../firebase/config'
+
 
 const getPost = (id) => {
     const post = ref(null);
     const error = ref(null);
     const load = async () => {
         try {
-            let data = await fetch(`http://localhost:3000/posts/${id}`);
-            if (!data.ok) {
-                throw Error("This data does not exist");
-            }
-            post.value = await data.json();
+            let res = await db.collection("posts").doc(id).get();
+            post.value = { ...res.data(), id: res.id }
         } catch (err) {
             error.value = err.message;
         }
